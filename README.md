@@ -122,5 +122,5 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 ## Contact
 
-For any questions or feedback, please contact Manus AI.
+For any questions or feedback, please contact Quick and Easy Tech Team.
 
