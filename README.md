@@ -4,6 +4,10 @@
 
 The Vintage Rolodex is a modern web-based contact management application designed with a nostalgic, old-timey aesthetic. It combines the charm of a classic rolodex with the power and convenience of digital technology, offering a unique and engaging user experience. This application is built using React, providing a responsive and interactive interface accessible across various devices.
 
+## Live Demo
+
+The application is deployed and available at: **[https://quickandeasyapplications-sudo.github.io/vintage-rolodex-demo/](https://quickandeasyapplications-sudo.github.io/vintage-rolodex-demo/)**
+
 ## Features
 
 ### Core Functionality
