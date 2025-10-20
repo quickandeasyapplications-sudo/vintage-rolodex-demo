@@ -102,8 +102,7 @@ const StorageService = {
       try {
         const text = e.target.result
         const lines = text.split('\n').filter(line => line.trim())
-        const headers = lines[0].split(',')
-        
+        // Skip header row and parse CSV data
         const contacts = lines.slice(1).map(line => {
           const values = []
           let current = ''
@@ -331,7 +330,11 @@ function App() {
       )
     }
     
-    setFilteredContacts(result.sort((a, b) => a.lastName.localeCompare(b.lastName)))
+    setFilteredContacts(result.sort((a, b) => {
+      const aLastName = a.lastName || ''
+      const bLastName = b.lastName || ''
+      return aLastName.localeCompare(bLastName)
+    }))
     setCurrentIndex(0)
   }, [searchQuery, contacts, showFavoritesOnly, selectedTags])
 
@@ -388,12 +391,23 @@ function App() {
   }
 
   const handleLetterClick = (letter) => {
-    const index = filteredContacts.findIndex(c => 
-      c.lastName.toUpperCase().startsWith(letter)
-    )
+    const index = filteredContacts.findIndex(c => {
+      const lastName = c.lastName || ''
+      return lastName.toUpperCase().startsWith(letter)
+    })
     if (index !== -1) {
       setCurrentIndex(index)
       SoundService.playClick()
+    } else {
+      // If no contacts start with this letter, find the first contact that comes after this letter
+      const nextIndex = filteredContacts.findIndex(c => {
+        const lastName = c.lastName || ''
+        return lastName.toUpperCase().localeCompare(letter) >= 0
+      })
+      if (nextIndex !== -1) {
+        setCurrentIndex(nextIndex)
+        SoundService.playClick()
+      }
     }
   }
 
